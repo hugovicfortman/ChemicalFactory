@@ -72,16 +72,13 @@ function getUniqueElementsCount(compoundString)
 	let compound = [];
 	for(let x = 0; x < compoundArray.length; x++)
 	{
-		if(roughCompound[compoundArray[x]] !== undefined)
+		let elementCountTupule = compoundArray[x].replace(/([A-Za-z]+)([0-9]+)/,'$1:$2').split(':');
+		if(roughCompound[elementCountTupule[0]] !== undefined)
 		{
-			roughCompound[compoundArray[x]] += 1;
+			roughCompound[elementCountTupule[0]] += Number(elementCountTupule[1]);
 		} else {
-			roughCompound[compoundArray[x]] = 1;
+			roughCompound[elementCountTupule[0]] = Number(elementCountTupule[1]);
 		}
 	}
-	for(let x in roughCompound)
-	{
-		compound.push(applyMultiplier(x, roughCompound[x]));
-	}
-	return JSON.parse("{" + compound.map((a) => {return a.replace(/([A-Za-z]+)([0-9]+)/,'"$1":$2');}).join(',') + "}");
+	return roughCompound;
 }
