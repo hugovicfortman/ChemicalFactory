@@ -11,14 +11,14 @@ function sortComplexChemicalToComponents(chemicalString)
 	let rawChemicalArray = [];
 	let processPlant = simplifiedString;
 	const chemicalComplexityDegree = simplifiedString.search(/\{/);
-	for(let x = 0; x < chemicalComplexityDegree; x++)
+	for(let x = 0; x <= chemicalComplexityDegree; x++)
 	{
-		if(processPlant.match(/\{[A-Za-z0-9_]+\}/) === null)
+		if(processPlant.match(/\{[A-Za-z0-9_]*\}/) === null)
 		{
 				continue;
 		}
-		rawChemicalArray.push(processPlant.match(/\{[A-Za-z0-9_]+\}/)[0].replace(/\{|\}/g,''));
-		processPlant = processPlant.replace(/\{[A-Za-z0-9_]+\}/,'_');
+		rawChemicalArray.push(processPlant.match(/\{[A-Za-z0-9_]*\}/)[0].replace(/\{|\}/g,''));
+		processPlant = processPlant.replace(/\{[A-Za-z0-9_]*\}/,'_');
 	}
 	rawChemicalArray.push(processPlant);
 	return rawChemicalArray;
