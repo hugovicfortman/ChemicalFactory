@@ -61,7 +61,7 @@ function applyParentMultipliers (a, b)
 	return b.replace(/\_(\d)+/,applyMultiplier(a,multiplier));
 }
 
-function getUniqueElementsCount(compoundArray)
+function getUniqueElementsCount(compoundString)
 {
 	let compoundArray = compoundString.match(/[A-Za-z]+[0-9]+/g);	
 	let roughCompound = {};
