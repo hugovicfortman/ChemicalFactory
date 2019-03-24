@@ -2,7 +2,7 @@
 function main(complexChemicalFormulaString)
 {
 	let chemCompound = sortComplexChemicalToComponents(complexChemicalFormulaString).map(giveElementsMultipliers).reduce(applyParentMultipliers);
-	console.log(getUniqueElementsCount(chemCompound))
+	return getUniqueElementsCount(chemCompound);
 }
 
 function sortComplexChemicalToComponents(chemicalString)

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script type="text/javascript" src="main.js"></script>
+    </head>
+    <body>
+        <input type="button" onclick="execMain();" value="Main" />
+        <input type="button" onclick="execSort();" value="Sort" />
+        <input type="button" onclick="execMultiplier();" value="Multiplier" />
+        <input id="iChem" type="text" />
+        <br/><br/>Specimens:<br/><br/>
+        Q(C4H2)3(C2O2)2
+        <br/>
+        Q[H2(C2O2)2]2
+        <br/>
+        <script>
+            let execMain = () => {
+                let chem = document.getElementById('iChem').value;
+                console.log(main(chem));
+            };
+            let execSort = () => {
+                let chem = document.getElementById('iChem').value;
+                console.log(sortComplexChemicalToComponents(chem));
+            };
+            let execMultiplier = () => {
+                let chem = document.getElementById('iChem').value;
+                console.log(giveElementsMultipliers(chem));
+            };
+
+            // Run General Tests...
+            window.addEventListener('load',() => {
+                let specs = [
+                    {'H2O'               : {'H':2, 'O':1}},
+                    {'H2SO4'             : {'H':2, 'S':1, 'O':4}},
+                    {'KMNO3'             : {'K':1, 'M':1, 'N':1, 'O':3}},
+                    {'Q(C4H2)3(C2O2)2'   : {'Q':1, 'C':18, 'H':6, '0':4}},
+                    {'Q[H2(C2O2)2]2'     : {'C':8, 'H':4, 'O':8, 'Q':1}}
+                ];
+
+                const runTests = () => {
+                    let confirmationList = document.createElement('ul');
+                    for(var x = 0; x < specs.length; x++)
+                    {
+                        let confirmation = document.createElement('li');
+                        for(let y in specs[x])
+                        {
+                            confirmation.textContent = y + '    :   ' + (runTest(specs[x])? 'Passed': 'Failed');
+                            confirmationList.appendChild(confirmation);
+                        }
+                    }
+                    document.body.appendChild(confirmationList);
+                };
+                const runTest = (spec) => {
+                    for(var x in spec){
+                        return IsObjMatch(spec[x], main(x));
+                    }
+                };
+                const IsObjMatch = (obj1, obj2) => {
+                    let isMatch = true;
+                    try {
+                        for(var x in obj1){
+                            isMatch = (obj1[x] === obj2[x]);
+                            if(!isMatch){
+                                break;
+                            }
+                        }
+                    } catch (error) {
+                        isMatch = false;
+                    }
+                    return isMatch;
+                };
+
+                runTests();
+            });
+        </script>
+    </body>
+</html>
